@@ -1,7 +1,6 @@
 import React from 'react';
 import './SearchBar.css';
 
-
 class SearchBar extends React.Component {
     constructor(props) {
         super(props);
@@ -11,15 +10,16 @@ class SearchBar extends React.Component {
             stortBy: 'best_match'
         };
 
-        this.handleTermChange = this.handleTermChange.bind(this);
-        this.handleLocationChange = this.handleLocationChange.bind(this);
-        this.handleSearch = this.handleSearch.bind(this);
-
         this.sortByOptions = {
             'Best Match': 'best_match',
             'Highest Rated': 'rating',
             'Most Reviewed': 'review_count',
         }
+
+        this.handleTermChange = this.handleTermChange.bind(this);
+        this.handleLocationChange = this.handleLocationChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleSortByChange = this.handleSortByChange.bind(this);
     }
 
     getSortByClass(sortByOption) {
@@ -31,15 +31,15 @@ class SearchBar extends React.Component {
     }
 
     handleSortByChange(sortByOption) {
-        this.setState({sortBy : sortByOption});
+        this.setState({sortBy: sortByOption});
     }
 
     handleTermChange(e) {
-        this.setState({term : e.target.value});
+        this.setState({term: e.target.value});
     }
 
     handleLocationChange(e) {
-        this.setState({location : e.target.value});
+        this.setState({location: e.target.value});
     }
 
     handleSearch(e) {
@@ -47,12 +47,10 @@ class SearchBar extends React.Component {
         e.preventDefault();
     }
 
-
-
     renderSortByOptions() {
         return Object.keys(this.sortByOptions).map(sortByOption => {
             let sortByOptionValue = this.sortByOptions[sortByOption];
-            return <li onClick={this.handleSortByChange.bind(this, sortByOptionValue)} className={this.getSortByClass(sortByOptionValue)} key={sortByOptionValue}>{sortByOption}</li>
+            return (<li onClick={this.handleSortByChange.bind(this, sortByOptionValue)} className={this.getSortByClass(sortByOptionValue)} key={sortByOptionValue}>{sortByOption}</li>)
         });
     }
 
